@@ -26,37 +26,38 @@ void insertion_sort_list(listint_t **list)
 	listint_t *t1, *t2, *tmp;
 	int a = 1;
 
-	if (*list == NULL || (*list)->next == NULL)
-		return;
-	t1 = *list;
-	t2 = (*list)->next;
-	tmp = t2->next;
-	while (t2)
+	if (*list != NULL && (*list)->next != NULL)
 	{
-		while (t1)
+		t1 = *list;
+		t2 = (*list)->next;
+		tmp = t2->next;
+		while (t2)
 		{
-			if (t1->n > t2->n)
+			while (t1)
 			{
-				swap(&t1, &t2);
-				t1 = t2->prev;
-				if (t1 == NULL)
-					*list = t2;
-				print_list(*list);
-				continue;
+				if (t1->n > t2->n)
+				{
+					swap(&t1, &t2);
+					t1 = t2->prev;
+					if (t1 == NULL)
+						*list = t2;
+					print_list(*list);
+					continue;
+				}
+				else
+					break;
+			}
+			if (a == 1)
+			{
+			t2 = tmp;
+			t1 = t2->prev;
+			if (t2->next != NULL)
+				tmp = t2->next;
+			else
+				a = 0;
 			}
 			else
 				break;
 		}
-		if (a == 1)
-		{
-		t2 = tmp;
-		t1 = t2->prev;
-		if (t2->next != NULL)
-			tmp = t2->next;
-		else
-			a = 0;
-		}
-		else
-			break;
 	}
 }
