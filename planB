@@ -1,0 +1,67 @@
+#include "sort.h"
+/**
+ * insertion_sort_list - sort doubly linked list with insertion
+ * @list: linked list to be sorted
+*/
+
+void insertion_sort_list(listint_t **list)
+{
+	listint_t *t1, *t2, *tmp;
+
+	if (*list == NULL || (*list)->next == NULL)
+		return;
+	t1 = *list;
+	t2 = (*list)->next;
+	tmp = t2->next;
+	while (t2)
+	{
+		if (t1->n < t2->n)
+		{
+			t2 = tmp;
+			t1 = t2->prev;
+			if (t2->next != NULL)
+				tmp = t2->next;
+			continue;
+		}
+		while (1)
+		{
+			if (t1 == NULL)
+			{
+				t2->prev->next = t2->next;
+				if (t2->next != NULL)
+					t2->next->prev = t2->prev;
+				t2->prev = NULL;
+				t2->next = *list;
+				(*list)->prev = t2;
+				*list = t2;
+				print_list(*list);
+				break;
+			}
+			if (t1->n > t2->n)
+			{
+				t1 = t1->prev;
+				continue;
+			}
+			else
+			{
+				if (t1->next == t2)
+					break;
+				else
+				{
+					t2->prev->next = t2->next;
+					if (t2->next != NULL)
+						t2->next->prev = t2->prev;
+					t2->prev = t1;
+					t2->next = t1->next;
+					t1->next->prev = t2;
+					t1->next = t2;
+					print_list(*list);
+				}
+			}
+		}
+		t2 = tmp;
+		t1 = t2->prev;
+		if (t2->next != NULL)
+			tmp = t2->next;
+	}
+}
