@@ -22,7 +22,7 @@ void shell_sort(int *array, size_t size)
 {
 	size_t i, gap, c;
 
-	if (size < 1)
+	if (size <= 1)
 		return;
 	for (gap = 1; gap <= size; gap = gap * 3 + 1)
 	{
