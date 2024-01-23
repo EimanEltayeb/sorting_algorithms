@@ -8,5 +8,6 @@ void bitonic_sort(int *array, size_t size)
 {
 	if (size <= 1)
 		return;
+	print_array(array, size);
 }
 
