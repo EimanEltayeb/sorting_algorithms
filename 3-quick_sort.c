@@ -1,23 +1,5 @@
 #include "sort.h"
-size_t partition(int *array, size_t low, size_t high, size_t size);
-/**
- * sort - sort the elements
- * @array: the array to be sorted
- * @high: num
- * @low: num
- * @size: array size
-*/
-void sort(int *array, size_t low, size_t high, size_t size)
-{
-	size_t p;
 
-	if (low >= high)
-		return;
-	p = partition(array, low, high, size);
-	if (p != 0)
-		sort(array, low, p - 1, size);
-	sort(array, p + 1, high, size);
-}
 /**
  * partition - a function
  * @array: the array to be sorted
@@ -40,13 +22,36 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 			x = array[i];
 			array[i] = array[j];
 			array[j] = x;
+			if (i != j)
+				print_array(array, size);
 		}
 	}
-	x = array[i + 1];
-	array[i + 1] = array[high];
+	i++;
+	x = array[i];
+	array[i] = array[high];
 	array[high] = x;
-	print_array(array, size);
-	return (i + 1);
+	if (i != high)
+		print_array(array, size);
+	return (i);
+}
+
+/**
+ * sort - sort the elements
+ * @array: the array to be sorted
+ * @high: num
+ * @low: num
+ * @size: array size
+*/
+void sort(int *array, size_t low, size_t high, size_t size)
+{
+	size_t p;
+
+	if (low >= high)
+		return;
+	p = partition(array, low, high, size);
+	if (p != 0)
+		sort(array, low, p - 1, size);
+	sort(array, p + 1, high, size);
 }
 
 /**
