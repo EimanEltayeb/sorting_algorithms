@@ -50,7 +50,10 @@ void insertion_sort_list(listint_t **list)
 			if (a == 1)
 			{
 			t2 = tmp;
-			t1 = t2->prev;
+			if (t2 == NULL && t1 == NULL)
+				break;
+			if (t2 != NULL)
+				t1 = t2->prev;
 			if (t2->next != NULL)
 				tmp = t2->next;
 			else
